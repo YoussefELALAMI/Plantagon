@@ -1,13 +1,19 @@
-# Plantagon 🌱
+# PLANTAGON 🌱
 
-**Plantagon** est une application connectée pour surveiller l’état de vos plantes en temps réel grâce à des capteurs.
+## Description
+Plantagon est une application innovante permettant de suivre l’état de votre plante via un avatar numérique. Grâce aux capteurs connectés, l’application affiche en temps réel des données telles que :
+- Température
+- Humidité du sol
+- Luminosité
 
-## Fonctionnalités principales
-- Mesurer l'humidité, la température, la luminosité, et l'humidité du sol.
-- Une interface interactive qui montre l'état de la plante de manière animée.
-- Historique des données pour surveiller l'évolution de vos plantes.
+L’objectif : assurer le bien-être optimal de vos plantes et améliorer leur suivi.
 
-## Structure du Projet
+## Fonctionnalités
+- Visualisation de l’état de la plante via une animation interactive.
+- Suivi des données en temps réel grâce à des capteurs connectés.
+- Notifications sur les besoins immédiats de la plante.
+
+## Architecture
 Voici la structure de ce projet :
 plantagon/
 ├── frontend/          # Contiendra le code React pour l'interface utilisateur
@@ -15,7 +21,6 @@ plantagon/
 ├── raspberry-pi/      # Contiendra les scripts Python la gestion des capteurs
 ├── README.md          # Documentation principale
 └── .gitignore         # Fichiers/dossiers à ignorer
-
 
 ## Technologies utilisées
 - **Frontend** : React + TypeScript
