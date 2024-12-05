@@ -1,23 +1,44 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
-# dependencies
-/node_modules
-/.pnp
-.pnp.js
+# Node.js (Backend)
+node_modules/               # Dépendances de Node.js
+backend/node_modules/
+backend/.env                # Variables d'environnement
 
-# testing
-/coverage
+# React (Frontend)
+frontend/node_modules/
+frontend/.pnp
+frontend/.pnp.js
+frontend/coverage
+frontend/.DS_Store
+frontend/.env.local
+frontend/.env.development.local
+frontend/.env.test.local
+frontend/.env.production.local
+frontend/npm-debug.log*
+frontend/yarn-debug.log*
+frontend/yarn-error.log*
+frontend/build/             # Fichiers de build React
+frontend/.env               # Variables d'environnement
 
-# production
-/build
+# SQLite Database
+*.db                        # Fichiers de base de données SQLite
+*.db-journal                # Journaux temporaires SQLite
 
-# misc
-.DS_Store
-.env.local
-.env.development.local
-.env.test.local
-.env.production.local
+# Python (Raspberry Pi)
+__pycache__/                # Fichiers compilés Python
+*.pyc                       # Bytecode Python
+*.pyo                       # Bytecode optimisé Python
 
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
+# Logs
+*.log                       # Fichiers de log
+npm-debug.log*              # Logs de débogage npm
+yarn-debug.log*             # Logs de débogage Yarn
+yarn-error.log*             # Logs d'erreur Yarn
+
+# Système d'exploitation
+.DS_Store                   # macOS
+Thumbs.db                   # Windows
+.idea/                      # JetBrains (IntelliJ, WebStorm, etc.)
+.vscode/                    # Configurations spécifiques VSCode
+*.swp                       # Fichiers temporaires Vim
