@@ -25,4 +25,5 @@ plantagon/
 ## Technologies utilisées
 - **Frontend** : React + TypeScript
 - **Backend** : Node.js + Express + SQLite
+- **Base de données** : SQLite
 - **Microcontrôleur** : Python (avec Raspberry Pi 3)
