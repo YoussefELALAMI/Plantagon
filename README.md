@@ -15,12 +15,12 @@ L’objectif : assurer le bien-être optimal de vos plantes et améliorer leur s
 
 ## Architecture
 Voici la structure de ce projet :
-plantagon/
-├── frontend/          # Contiendra le code React pour l'interface utilisateur
-├── backend/           # Contiendra le Serveur Node.js avec base SQLite
-├── raspberry-pi/      # Contiendra les scripts Python la gestion des capteurs
-├── README.md          # Documentation principale
-└── .gitignore         # Fichiers/dossiers à ignorer
+plantagon/ \
+├── frontend/          # Contiendra le code React pour l'interface utilisateur\
+├── backend/           # Contiendra le Serveur Node.js avec base SQLite\
+├── raspberry-pi/      # Contiendra les scripts Python la gestion des capteurs\
+├── README.md          # Documentation principale\
+└── .gitignore         # Fichiers/dossiers à ignorer\
 
 ## Technologies utilisées
 - **Frontend** : React + TypeScript
