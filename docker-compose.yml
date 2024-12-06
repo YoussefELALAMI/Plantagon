@@ -1,0 +1,37 @@
+services:
+  frontend:
+    image: node:18
+    working_dir: /app
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+    ports:
+      - "3000:3000"
+    command: >
+      sh -c "npm install && npm start"
+    depends_on:
+      - backend
+
+  backend:
+    image: node:18
+    working_dir: /app
+    volumes:
+      - ./backend:/app
+      - /app/node_modules
+      - ./data:/app/data
+    ports:
+      - "5000:5000"
+    command: >
+      sh -c "npm install && node server.js"
+    environment:
+      - DATABASE_FILE=/app/data/database.sqlite
+
+  sqlite:
+    image: nouchka/sqlite3
+    container_name: sqlite-cli
+    volumes:
+      - ./data:/data
+    entrypoint: ["tail", "-f", "/dev/null"]
+
+volumes:
+  data:
