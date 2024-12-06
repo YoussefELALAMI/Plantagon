@@ -21,7 +21,7 @@ services:
     ports:
       - "5000:5000"
     command: >
-      sh -c "npm install && nodemon server.js"
+      sh -c "npm install && npm start"
 
 volumes:
   data:
