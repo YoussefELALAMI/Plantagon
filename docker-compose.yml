@@ -18,20 +18,10 @@ services:
     volumes:
       - ./backend:/app
       - /app/node_modules
-      - ./data:/app/data
     ports:
       - "5000:5000"
     command: >
-      sh -c "npm install && node server.js"
-    environment:
-      - DATABASE_FILE=/app/data/database.sqlite
-
-  sqlite:
-    image: nouchka/sqlite3
-    container_name: sqlite-cli
-    volumes:
-      - ./data:/data
-    entrypoint: ["tail", "-f", "/dev/null"]
+      sh -c "npm install && nodemon server.js"
 
 volumes:
   data:
