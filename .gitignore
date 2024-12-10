@@ -4,6 +4,7 @@
 node_modules/               # Dépendances de Node.js
 backend/node_modules/
 backend/.env                # Variables d'environnement
+backend/dist/**/*
 
 # React (Frontend)
 frontend/node_modules/
