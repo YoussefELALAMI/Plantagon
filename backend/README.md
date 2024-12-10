@@ -1,14 +1,12 @@
 # Documentation de l'API Plantagon
 
-Cette documentation explique comment interagir avec l'API **Plantagon**, en particulier avec le point de terminaison `/infos`.
+Cette documentation explique comment interagir avec l'API **Plantagon**, en particulier avec les points de terminaison `/infos` et `/add-data`.
 
 ---
 
 ## Configuration
 
 - **Base URL** : `http://localhost:5500`
-
----
 
 ## Endpoints
 
@@ -43,13 +41,13 @@ Code : `200 OK`
 ```json
 [
   {
-    "Time": "2024-01-01T10:00",
+    "time": "2024-01-01T10:00",
     "temp": 22.5,
     "hygro": 55.1,
     "lum": 350.0
   },
   {
-    "Time": "2024-01-02T12:30",
+    "time": "2024-01-02T12:30",
     "temp": 23.0,
     "hygro": 50.0,
     "lum": 400.0
@@ -59,63 +57,107 @@ Code : `200 OK`
 
 #### Gestion des erreurs
 
-| Code | Message                                                                          | Explication                                               |
-| ---- | -------------------------------------------------------------------------------- | --------------------------------------------------------- |
-| 400  | `{"error": "Veuillez fournir les paramètres f et t (format YYYY-MM-DDThh:mm)."}` | Paramètres mal formés ou manquants (si logique modifiée). |
-| 500  | `{"error": "Erreur interne du serveur."}`                                        | Problème interne, généralement lié à la base de données.  |
+| Code  | Message                                                                        | Explication                                              |
+| ----- | ------------------------------------------------------------------------------ | -------------------------------------------------------- |
+| `400` | {"error": "Veuillez fournir les paramètres f et t (format YYYY-MM-DDThh:mm)."} | Paramètres mal formés ou manquants.                      |
+| `500` | {"error": "Erreur interne du serveur."}                                        | Problème interne, généralement lié à la base de données. |
+
+---
+
+### `/add-data`
+
+#### Description
+
+Ce point de terminaison permet d'ajouter une nouvelle entrée dans la base de données avec les données fournies par l'utilisateur.
+
+#### Méthode HTTP
+
+`POST`
+
+#### Corps de la requête
+
+Le corps de la requête doit être au format JSON avec les clés suivantes :
+
+| Nom     | Type   | Requis | Description                                 |
+| ------- | ------ | ------ | ------------------------------------------- |
+| `time`  | String | Oui    | Date et heure au format `YYYY-MM-DDThh:mm`. |
+| `temp`  | Number | Oui    | Température en degrés Celsius.              |
+| `hygro` | Number | Oui    | Taux d'humidité en pourcentage.             |
+| `lum`   | Number | Oui    | Niveau de luminosité en unité arbitraire.   |
+
+#### Exemple de requête
+
+```http
+POST /add-data HTTP/1.1
+Host: localhost:5500
+Content-Type: application/json
+
+{
+  "time": "2024-12-10T12:30",
+  "temp": 22.5,
+  "hygro": 60.2,
+  "lum": 500.5
+}
+```
+
+#### Exemple de réponse
+
+Code : `201 Created`
+
+```json
+{
+  "message": "Données insérées avec succès."
+}
+```
+
+#### Gestion des erreurs
+
+| Code | Message                                                                      | Explication                                              |
+| ---- | ---------------------------------------------------------------------------- | -------------------------------------------------------- |
+| 400  | `{"error": "Les champs time, temp, hygro et lum sont requis."}`              | Champs manquants dans le corps de la requête.            |
+| 400  | `{"error": "Le champ time doit être au format YYYY-MM-DDThh:mm."}`           | Format de date invalide.                                 |
+| 400  | `{"error": "Les champs temp, hygro et lum doivent être des nombres réels."}` | Les valeurs ne sont pas valides.                         |
+| 500  | `{"error": "Erreur interne du serveur lors de l'insertion."}`                | Problème interne, généralement lié à la base de données. |
 
 ---
 
 ## Exemple de cas d'utilisation
 
-### Filtrer les données entre deux dates spécifiques
+### Ajouter une nouvelle donnée
 
 **Requête :**
 
 ```http
-GET /infos?f=2024-01-01T00:00&t=2024-12-31T23:59 HTTP/1.1
+POST /add-data HTTP/1.1
+Host: localhost:5500
+Content-Type: application/json
+
+{
+  "time": "2024-12-10T12:30",
+  "temp": 22.5,
+  "hygro": 60.2,
+  "lum": 500.5
+}
 ```
 
 **Résultat attendu :**
 
 ```json
-[
-  {
-    "Time": "2024-01-01T10:00",
-    "temp": 22.5,
-    "hygro": 55.1,
-    "lum": 350.0
-  },
-  {
-    "Time": "2024-01-02T12:30",
-    "temp": 23.0,
-    "hygro": 50.0,
-    "lum": 400.0
-  }
-]
+{
+  "message": "Données insérées avec succès."
+}
 ```
 
 ---
 
-### Obtenir toutes les données disponibles
+## Notes importantes
 
-**Requête :**
-
-```http
-GET /infos HTTP/1.1
-```
-
-**Résultat attendu :**
-Retourne toutes les données de la base de données
+- Le champ `time` doit être unique si votre base de données impose une contrainte d'unicité sur ce champ.
+- Si le format des données est incorrect, le serveur retourne une erreur `400 Bad Request`.
+- La valeur des champs numériques (`temp`, `hygro`, `lum`) doit être raisonnable selon votre cas d'utilisation.
 
 ---
 
-### Notes importantes
-
-- Si aucune donnée n'est disponible dans la plage spécifiée, le serveur retourne un tableau vide (`[]`).
-
----
-
-### Auteur
+## Auteur
 
 Antonin Litschgy
