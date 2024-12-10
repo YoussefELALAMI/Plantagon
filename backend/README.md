@@ -150,14 +150,6 @@ Content-Type: application/json
 
 ---
 
-## Notes importantes
-
-- Le champ `time` doit être unique si votre base de données impose une contrainte d'unicité sur ce champ.
-- Si le format des données est incorrect, le serveur retourne une erreur `400 Bad Request`.
-- La valeur des champs numériques (`temp`, `hygro`, `lum`) doit être raisonnable selon votre cas d'utilisation.
-
----
-
 ## Auteur
 
 Antonin Litschgy
