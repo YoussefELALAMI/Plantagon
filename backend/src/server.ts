@@ -1,11 +1,23 @@
-const express = require("express");
-const sqlite3 = require("sqlite3").verbose();
-const path = require("path");
+import express, { Request, Response } from "express";
+import sqlite3 from "sqlite3";
+import path from "path";
 
+// Définir les types pour la base de données
+interface PlantData {
+  Time: string;
+  temp: number;
+  hygro: number;
+  lum: number;
+}
+
+// Configuration du serveur
 const app = express();
+const PORT = 5500;
 
-// Cpnnexion à la base de données
-const dbPath = path.join(__dirname, "data", "plantagon.db");
+// Chemin vers la base de données
+const dbPath = path.join(__dirname, "../data", "plantagon.db");
+
+// Connecter à la base de données SQLite
 const db = new sqlite3.Database(dbPath, (err) => {
   if (err) {
     console.error(
@@ -17,31 +29,26 @@ const db = new sqlite3.Database(dbPath, (err) => {
   }
 });
 
-// Endpoint de la racine
-app.get("/", (req, res) => {
-  res.send("Serveur en cours de fonctionnement !");
-});
-
-// Endpoint : /info?f=A&t=B
-app.get("/infos", (req, res) => {
+// Endpoint : /infos?f=A&t=B
+app.get("/infos", (req: Request, res: Response) => {
   // Valeurs par défaut
   const defaultMinDate = "0000-01-01T00:00";
   const defaultMaxDate = "9999-12-31T23:59";
 
   // Récupérer les paramètres
-  const f = req.query.f || defaultMinDate;
-  const t = req.query.t || defaultMaxDate;
+  const f: string = (req.query.f as string) || defaultMinDate;
+  const t: string = (req.query.t as string) || defaultMaxDate;
 
   // Préparer la requête SQL
   const query = `
-    SELECT time, temp, hygro, lum 
-    FROM plantData
+    SELECT time as Time, temp, hygro, lum 
+    FROM plantData 
     WHERE time BETWEEN ? AND ? 
     ORDER BY time ASC
   `;
 
   // Exécuter la requête
-  db.all(query, [f, t], (err, rows) => {
+  db.all(query, [f, t], (err, rows: PlantData[]) => {
     if (err) {
       console.error("Erreur lors de la requête :", err.message);
       return res.status(500).json({ error: "Erreur interne du serveur." });
@@ -52,10 +59,9 @@ app.get("/infos", (req, res) => {
   });
 });
 
-// Démarrage du serveur
-const PORT = 5500;
+// Démarrer le serveur
 app.listen(PORT, () => {
-  console.log(`Server is running on http://localhost:${PORT}`);
+  console.log(`Serveur Express démarré sur le port ${PORT}`);
 });
 
 // Fermer la base de données proprement lors de la sortie
