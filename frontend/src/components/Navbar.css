@@ -1,0 +1,97 @@
+/* Navbar Container */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  background-color: #fff; /* Pure white background */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+/* Brand Logo */
+.navbar-logo {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #000;
+  letter-spacing: 0.5px;
+}
+
+/* Navbar Links */
+.navbar-links {
+  display: flex;
+  gap: 2rem; /* Proper spacing between links */
+  align-items: center;
+}
+
+/* Navbar Link Styling */
+.navbar-link {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem; /* Spacing between icon and text */
+  text-decoration: none;
+  font-size: 1rem;
+  color: #333;
+  transition: color 0.3s ease, border-bottom 0.3s ease;
+  border-bottom: 2px solid transparent; /* Underline effect */
+}
+
+/* Hover Effect */
+.navbar-link:hover {
+  color: #000; /* Black on hover */
+  border-bottom: 2px solid #000; /* Add underline */
+}
+
+/* Navbar Buttons Container */
+.navbar-buttons {
+  display: flex;
+  gap: 1rem; /* Spacing between buttons */
+}
+
+/* Navbar Buttons */
+.navbar-button {
+  padding: 0.5rem 1rem;
+  border: 2px solid #000;
+  background-color: transparent;
+  color: #000;
+  font-size: 1rem;
+  font-weight: bold;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+/* Login Button */
+.login-button {
+  background-color: transparent; /* Transparent for login */
+}
+
+/* Sign Up Button */
+.signup-button {
+  background-color: #000; /* Black for contrast */
+  color: #fff;
+}
+
+/* Hover Effects for Buttons */
+.navbar-button:hover {
+  background-color: #000;
+  color: #fff;
+}
+
+/* Icons Styling */
+.navbar-icon {
+  font-size: 1.2rem;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .navbar-links {
+    gap: 1rem; /* Reduce spacing on smaller screens */
+  }
+
+  .navbar-buttons {
+    gap: 0.5rem; /* Reduce button spacing on smaller screens */
+  }
+}
