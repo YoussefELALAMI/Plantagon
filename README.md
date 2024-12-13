@@ -23,7 +23,7 @@ plantagon/ \
 ├── frontend/ # Contiendra le code React pour l'interface utilisateur\
 ├── backend/ # Contiendra le Serveur Node.js avec base SQLite\
 ├── raspberry-pi/ # Contiendra les scripts Python la gestion des capteurs\
-└── README.md # Documentation principale\
+└── README.md # Documentation principale
 
 ---
 
