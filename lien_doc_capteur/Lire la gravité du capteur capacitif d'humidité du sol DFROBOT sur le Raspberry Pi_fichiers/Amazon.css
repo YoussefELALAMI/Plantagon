@@ -1,0 +1,100 @@
+#al_popup
+{
+   position: absolute;
+   display: none;
+   z-index: 50;
+   width: 25px;
+   left: 0;
+   top: 0;
+}
+
+.al_found0
+{
+   display: none;
+}
+
+#al_popup img {
+   width:100%;
+   float:left;
+   border: none;
+   padding: 0;
+   margin: 1px;
+}
+
+.amazon_container {
+   min-width: 320px;
+   margin-right:10px;
+   position: relative;
+}
+
+.amazon_prod {
+   width:100%;
+   min-height:110px;
+   height:auto;
+   margin: 3px;
+   border-bottom: 1px dashed;
+}
+
+.amazon_img_container {
+   height:100px;
+   float:right;
+   margin:3px;
+   width:100px;
+   overflow:hidden;
+}
+
+.amazon_img_container a {
+   text-align:center;
+}
+
+.amazon_img_container img {
+   margin: 0;
+   border: none;
+   padding: 0;
+   margin-left:auto;
+   margin-right:auto;
+   display: block;
+   height:100%;
+}
+
+.amazon_text_container {
+   width:65%;
+   margin-bottom:20px;
+}
+
+.amazon_text_container p {
+   margin:0;
+}
+
+.amazon_details {
+   margin-top:15px;
+}
+
+.amazon_text_container p:first-child:first-letter {
+   line-height: 1em;
+   font-size: 1em;
+   padding: 0;
+}
+
+.al_editorial_source {
+   margin-top: 1em;
+   font-size: 120%;
+}
+
+.al_editorial_content {
+   margin-top: 1em;
+}
+
+.amazon_price {
+   color:red;
+}
+
+.amazon_price a img {
+   display: inline;
+}
+.amazon_price img {
+   display: inline;
+}
+
+.amazon_flag {
+}
