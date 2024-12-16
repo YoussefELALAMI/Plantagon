@@ -11,17 +11,17 @@ interface PlantInfo {
 
 const Plante: React.FC = () => {
   const [plantData, setPlantData] = useState<PlantInfo[]>([]); // Plant data as an array of PlantInfo objects
-  const [percentage , setPercentage] = useState<number>(0);
+  const [percentage, setPercentage] = useState<number>(0);
   const [wateringStatus, setWateringStatus] = useState<string>("");
 
   /**
    * Function to fetch plant data from the server
-   * @param startDate 
-   * @param endDate 
+   * @param startDate
+   * @param endDate
    * @returns Data fetched from the server
    */
   const fetchPlantData = async (startDate: string, endDate: string) => {
-    try{
+    try {
       const response = await fetch(`/info?f=${startDate}&t=${endDate}`); // Fetch data from the server
       if (!response.ok) {
         throw new Error(`Failed to fetch data: ${response.statusText}`);
@@ -79,7 +79,8 @@ const Plante: React.FC = () => {
       <ul>
         {plantData.map((data, index) => (
           <li key={index}>
-            {data.time} - Temp: {data.temp}°C, Hygro: {data.hygro}%, Lum: {data.lum}%
+            {data.time} - Temp: {data.temp}°C, Hygro: {data.hygro}%, Lum:{" "}
+            {data.lum}%
           </li>
         ))}
       </ul>
