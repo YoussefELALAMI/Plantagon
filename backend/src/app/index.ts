@@ -1,9 +1,19 @@
 import express, { Request, Response } from "express";
+import cors from "cors";
 import infos from "./infos";
 import addData from "./addData";
 
 // Configuration du serveur
 const app = express();
+
+// Liste des origines autorisées
+const allowedOrigins = ["http://localhost:3000"];
+
+const options: cors.CorsOptions = {
+  origin: allowedOrigins,
+};
+
+app.use(cors(options));
 app.use(express.json());
 
 // Endpoint : /infos?f=A&t=B
