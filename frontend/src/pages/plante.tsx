@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { data } from "react-router-dom";
+// import { data } from "react-router-dom";
 import "./styles/plante.css";
 
 interface PlantInfo {
