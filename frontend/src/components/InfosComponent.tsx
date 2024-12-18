@@ -13,32 +13,31 @@ const InfosComponent: React.FC = () => {
   const [endDate, setEndDate] = useState<string>(""); // Date de fin
 
   useEffect(() => {
+    const fetchInfos = async () => {
+      try {
+        if (!startDate || !endDate) {
+          console.error("Les dates de début et de fin doivent être définies");
+          return;
+        }
+
+        const url = `http://localhost:5500/infos?f=${encodeURIComponent(
+          startDate
+        )}&t=${encodeURIComponent(endDate)}`;
+        const response = await fetch(url);
+
+        if (!response.ok) {
+          throw new Error("Erreur lors de la récupération des données");
+        }
+
+        const data = await response.json();
+        setInfos(data);
+      } catch (error) {
+        console.error("Erreur:", error);
+        // Gérer l'erreur (afficher un message à l'utilisateur, par exemple)
+      }
+    };
     fetchInfos();
   }, [startDate, endDate]);
-
-  const fetchInfos = async () => {
-    try {
-      if (!startDate || !endDate) {
-        console.error("Les dates de début et de fin doivent être définies");
-        return;
-      }
-
-      const url = `http://localhost:5500/infos?f=${encodeURIComponent(
-        startDate
-      )}&t=${encodeURIComponent(endDate)}`;
-      const response = await fetch(url);
-
-      if (!response.ok) {
-        throw new Error("Erreur lors de la récupération des données");
-      }
-
-      const data = await response.json();
-      setInfos(data);
-    } catch (error) {
-      console.error("Erreur:", error);
-      // Gérer l'erreur (afficher un message à l'utilisateur, par exemple)
-    }
-  };
 
   const handleStartDateChange = (
     event: React.ChangeEvent<HTMLInputElement>
