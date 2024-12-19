@@ -1,50 +1,44 @@
-import React, { useState, useEffect } from "react";
-
-interface Info {
-  time: string;
-  temp: number;
-  hygro: number;
-  lum: number;
-}
+import React, { useEffect, useRef, useCallback } from 'react';
+import { PlantInfo } from '../types/PlantInfo';
 
 interface DataProviderProps {
-  startDate: string;
-  endDate: string;
-  onDataFetched: (infos: Info[]) => void; // Callback to send data to parent
+  onDataFetched: (infos: PlantInfo[]) => void;
+  pollInterval?: number;
 }
 
-const DataProviderComponent: React.FC<DataProviderProps> = ({ startDate, endDate, onDataFetched }) => {
-  const [infos, setInfos] = useState<Info[]>([]);
+const DataProviderComponent: React.FC<DataProviderProps> = ({
+  onDataFetched,
+  pollInterval = 5000
+}) => {
+  const lastFetchTime = useRef<string | null>(null);
+
+  const fetchLatestData = useCallback(async () => {
+    try {
+      const url = new URL('http://localhost:5500/infos');
+      if (lastFetchTime.current) {
+        url.searchParams.set('since', lastFetchTime.current);
+      }
+
+      const response = await fetch(url.toString());
+      if (!response.ok) throw new Error('Failed to fetch data');
+
+      const data: PlantInfo[] = await response.json();
+      if (data.length > 0) {
+        lastFetchTime.current = data[data.length - 1].time;
+        onDataFetched(data);
+      }
+    } catch (error) {
+      console.error('Error fetching data:', error);
+    }
+  }, [onDataFetched]);
 
   useEffect(() => {
-    const fetchInfos = async () => {
-      try {
-        if (!startDate || !endDate) {
-          console.error("Les dates de début et de fin doivent être définies");
-          return;
-        }
+    fetchLatestData();
+    const intervalId = setInterval(fetchLatestData, pollInterval);
+    return () => clearInterval(intervalId);
+  }, [fetchLatestData, pollInterval]);
 
-        const url = `http://localhost:5500/infos?f=${encodeURIComponent(
-          startDate
-        )}&t=${encodeURIComponent(endDate)}`;
-        const response = await fetch(url);
-
-        if (!response.ok) {
-          throw new Error("Erreur lors de la récupération des données");
-        }
-
-        const data = await response.json();
-        setInfos(data);
-        onDataFetched(data); // Pass the data to the parent component
-      } catch (error) {
-        console.error("Erreur:", error);
-      }
-    };
-
-    fetchInfos();
-  }, [startDate, endDate, onDataFetched]);
-
-  return null; // Don't render anything in this component
+  return null;
 };
 
 export default DataProviderComponent;
