@@ -1,0 +1,40 @@
+.stats-container {
+    padding: 2rem;
+    background-color: #ffffff;
+  }
+  
+  h1, h2 {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: #2c3e50;
+  }
+  
+  .date-inputs {
+    margin-bottom: 1rem;
+  }
+  
+  input[type="datetime-local"] {
+    padding: 0.5rem;
+    border-radius: 8px;
+    border: 1px solid #bdc3c7;
+    font-size: 1rem;
+  }
+  
+  input[type="datetime-local"]:focus {
+    border-color: #3498db;
+  }
+  
+  @media (max-width: 768px) {
+    .stats-container {
+      padding: 1.5rem;
+    }
+  
+    h1 {
+      font-size: 1.6rem;
+    }
+  
+    h2 {
+      font-size: 1.4rem;
+    }
+  }
+  
