@@ -1,14 +1,12 @@
 import React, { useState, useEffect } from "react";
+import { PlantInfo } from "../types/PlantInfo";
 
-interface Info {
-  time: string;
-  temp: number;
-  hygro: number;
-  lum: number;
-}
+/**
+ * Component that fetches and displays plant information.
+ */
 
 const InfosComponent: React.FC = () => {
-  const [infos, setInfos] = useState<Info[]>([]);
+  const [infos, setInfos] = useState<PlantInfo[]>([]);
   const [startDate, setStartDate] = useState<string>(""); // Date de début
   const [endDate, setEndDate] = useState<string>(""); // Date de fin
 
