@@ -1,6 +1,9 @@
 import React, { useEffect, useRef, useCallback } from 'react';
 import { PlantInfo } from '../types/PlantInfo';
 
+/**
+ * Component that fetches data from the server and calls the `onDataFetched` callback
+ */
 interface DataProviderProps {
   onDataFetched: (infos: PlantInfo[]) => void;
   pollInterval?: number;
