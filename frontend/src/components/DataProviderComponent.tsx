@@ -11,7 +11,7 @@ interface DataProviderProps {
 
 const DataProviderComponent: React.FC<DataProviderProps> = ({
   onDataFetched,
-  pollInterval = 5000
+  pollInterval = 10000
 }) => {
   const lastFetchTime = useRef<string | null>(null);
 

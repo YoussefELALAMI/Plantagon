@@ -1,7 +1,6 @@
 import React, { useMemo } from 'react';
-import { usePlantData } from '../hooks/usePlantData';
+import { usePlantData } from '../services/usePlantData';
 import DataProviderComponent from '../components/DataProviderComponent';
-import { PlantInfo } from '../types/PlantInfo';
 
 const Plante: React.FC = () => {
   const { recentData, updateData } = usePlantData(100);
@@ -50,7 +49,7 @@ const Plante: React.FC = () => {
 
       <DataProviderComponent 
         onDataFetched={updateData}
-        pollInterval={5000}
+        pollInterval={10000}
       />
     </div>
   );
