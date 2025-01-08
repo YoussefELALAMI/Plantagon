@@ -1,69 +1,55 @@
-import React, { useState, useEffect } from "react";
-import "./styles/plante.css";
-import DataProviderComponent from "../components/DataProviderComponent";
-
-interface PlantInfo {
-  time: string; // Date in "YYYY-MM-DDThh:mm" format
-  temp: number; // Temperature
-  hygro: number; // Humidity
-  lum: number; // Luminosity
-}
+import React, { useMemo } from 'react';
+import { usePlantData } from '../services/usePlantData';
+import DataProviderComponent from '../components/DataProviderComponent';
 
 const Plante: React.FC = () => {
-  const [plantData, setPlantData] = useState<PlantInfo[]>([]); // Plant data
-  const [percentage, setPercentage] = useState<number>(0);
-  const [wateringStatus, setWateringStatus] = useState<string>("");
+  const { recentData, updateData } = usePlantData(100);
 
-  /**
-   * Analyze plant data and update watering status
-   */
-  const analyzeData = (data: PlantInfo[]) => {
-    if (data.length === 0) {
-      return;
+  const { wateringStatus, percentage } = useMemo(() => {
+    if (recentData.length === 0) {
+      return { wateringStatus: '', percentage: 0 };
     }
-    const lastData = data[data.length - 1];
-    const { hygro } = lastData;
 
-    if (hygro < 50) {
-      setWateringStatus("Water me please!");
-      setPercentage(100 - hygro);
-    } else {
-      setWateringStatus("I'm good, thanks!");
-      setPercentage(hygro);
-    }
+    const lastData = recentData[recentData.length - 1];
+    const hygro = lastData.hygro;
+
+    return {
+      wateringStatus: hygro < 50 ? "Water me please!" : "I'm good, thanks!",
+      percentage: hygro < 50 ? 100 - hygro : hygro
+    };
+  }, [recentData]);
+
+  const formatTime = (timeString: string) => {
+    return new Date(timeString).toLocaleTimeString(undefined, {
+      hour: '2-digit',
+      minute: '2-digit',
+      second: '2-digit'
+    });
   };
-
-  /**
-   * Callback to receive data from DataProviderComponent
-   */
-  const handleDataFetched = (data: PlantInfo[]) => {
-    setPlantData(data); // Update plant data
-    analyzeData(data); // Analyze the data
-  };
-
-  const now = new Date();
-  const startDate = new Date(new Date().setMonth(new Date().getMonth() - 1)).toISOString().slice(0, 16); // Last month
-  const endDate = now.toISOString().slice(0, 16); // Current time
 
   return (
     <div className="plante-container">
       <h1>Ma Plante</h1>
       <p>L'état courant de l'eau : {wateringStatus}</p>
       <p>Le taux d'humidité : {percentage}%</p>
-      <p>Les données de la plante :</p>
-      <ul>
-        {plantData.map((data, index) => (
-          <li key={index}>
-            {data.time} - Temp: {data.temp}°C, Hygro: {data.hygro}%, Lum:{" "}
-            {data.lum}%
-          </li>
-        ))}
-      </ul>
-      {/* Include DataProviderComponent for data fetching */}
-      <DataProviderComponent
-        startDate={startDate}
-        endDate={endDate}
-        onDataFetched={handleDataFetched}
+      
+      <div className="data-container">
+        <h2>Recent Readings</h2>
+        <div className="readings-list">
+          {recentData.slice(-10).map((data: any) => (
+            <div key={data.id} className="reading-item">
+              <span>{formatTime(data.time)}</span>
+              <span>Temp: {data.temp}°C</span>
+              <span>Hygro: {data.hygro}%</span>
+              <span>Lum: {data.lum}%</span>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <DataProviderComponent 
+        onDataFetched={updateData}
+        pollInterval={10000}
       />
     </div>
   );
