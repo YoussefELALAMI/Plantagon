@@ -46,7 +46,7 @@ function addData(req: Request, res: Response): void {
     `;
 
   // Exécuter la requête
-  db.run(query, [timeParsed, tempParsed, hygroParsed, lumParsed], (err) => {
+  db.run(query, [time, tempParsed, hygroParsed, lumParsed], (err) => {
     if (err) {
       console.error("Erreur lors de l'insertion :", err.message);
       return res

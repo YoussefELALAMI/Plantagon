@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { PlantInfo } from "../types/PlantInfo";
+import ChartsComponent from "./ChartsComponent";
+import "./stats.css";
 
 /**
  * Component that fetches and displays plant information.
@@ -7,10 +9,17 @@ import { PlantInfo } from "../types/PlantInfo";
 
 const InfosComponent: React.FC = () => {
   const [infos, setInfos] = useState<PlantInfo[]>([]);
-  const [startDate, setStartDate] = useState<string>(""); // Date de début
-  const [endDate, setEndDate] = useState<string>(""); // Date de fin
+  const [startDate, setStartDate] = useState<string>(
+    new Date(new Date().getTime() - 7 * 24 * 60 * 60 * 1000)
+      .toISOString()
+      .slice(0, -8)
+  ); // Date de début
+  const [endDate, setEndDate] = useState<string>(
+    new Date().toISOString().slice(0, -8)
+  ); // Date de fin
 
   useEffect(() => {
+    console.log(startDate, endDate);
     const fetchInfos = async () => {
       try {
         if (!startDate || !endDate) {
@@ -31,7 +40,6 @@ const InfosComponent: React.FC = () => {
         setInfos(data);
       } catch (error) {
         console.error("Erreur:", error);
-        // Gérer l'erreur (afficher un message à l'utilisateur, par exemple)
       }
     };
     fetchInfos();
@@ -48,35 +56,28 @@ const InfosComponent: React.FC = () => {
   };
 
   return (
-    <div>
+    <>
       <h2>Informations</h2>
-      <div>
-        <label>Date de début: </label>
-        <input
-          type="datetime-local"
-          value={startDate}
-          onChange={handleStartDateChange}
-        />
+      <div className="dateSelector">
+        <div>
+          <label>Date de début: </label>
+          <input
+            type="datetime-local"
+            value={startDate}
+            onChange={handleStartDateChange}
+          />
+        </div>
+        <div>
+          <label>Date de fin: </label>
+          <input
+            type="datetime-local"
+            value={endDate}
+            onChange={handleEndDateChange}
+          />
+        </div>
       </div>
-      <div>
-        <label>Date de fin: </label>
-        <input
-          type="datetime-local"
-          value={endDate}
-          onChange={handleEndDateChange}
-        />
-      </div>
-      <ul>
-        {infos.map((info, index) => (
-          <li key={index}>
-            <strong>Time:</strong> {new Date(info.time).toLocaleString()} <br />
-            <strong>Température:</strong> {info.temp} °C <br />
-            <strong>Humidité:</strong> {info.hygro} % <br />
-            <strong>Luminosité:</strong> {info.lum} lux
-          </li>
-        ))}
-      </ul>
-    </div>
+      <ChartsComponent infos={infos} />
+    </>
   );
 };
 
