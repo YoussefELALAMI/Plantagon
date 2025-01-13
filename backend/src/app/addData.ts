@@ -27,6 +27,9 @@ function addData(req: Request, res: Response): void {
     return;
   }
 
+  // Convertir la date en format ISO (YYYY-MM-DDTHH:mm:ss)
+  const timeFormatted = timeParsed.toISOString().slice(0, 16);
+
   // Vérifier que les valeurs sont des nombres
   const tempParsed = parseFloat(temp);
   const hygroParsed = parseFloat(hygro);
@@ -46,7 +49,7 @@ function addData(req: Request, res: Response): void {
     `;
 
   // Exécuter la requête
-  db.run(query, [time, tempParsed, hygroParsed, lumParsed], (err) => {
+  db.run(query, [timeFormatted, tempParsed, hygroParsed, lumParsed], (err) => {
     if (err) {
       console.error("Erreur lors de l'insertion :", err.message);
       return res
