@@ -31,37 +31,25 @@ const ChartComponent: React.FC<ChartComponentProps> = ({ infos }) => {
   }));
 
   // Options de configuration pour le graphique
-  const options = {
+  const hygrometryOptions = {
     animationEnabled: true,
     theme: "light2",
     title: {
-      text: "Graphique Température, Humidité et Luminosité",
+      text: "Graphique Hygrométrie et Humidité",
     },
     axisX: {
       title: "Temps",
       valueFormatString: "DD MMM HH:mm",
     },
     axisY: {
-      title: "Valeur",
+      title: "Pourcentage (%)",
       includeZero: false,
+      maximum: 100,
     },
     toolTip: {
       shared: true,
     },
-    legend: {
-      cursor: "pointer",
-      verticalAlign: "top",
-      horizontalAlign: "center",
-    },
     data: [
-      {
-        type: "line",
-        showInLegend: true,
-        name: "Température (°C)",
-        xValueFormatString: "DD MMM HH:mm",
-        yValueFormatString: "#,##0.## °C",
-        dataPoints: temperatureData,
-      },
       {
         type: "line",
         showInLegend: true,
@@ -73,15 +61,7 @@ const ChartComponent: React.FC<ChartComponentProps> = ({ infos }) => {
       {
         type: "line",
         showInLegend: true,
-        name: "Luminosité (lux)",
-        xValueFormatString: "DD MMM HH:mm",
-        yValueFormatString: "#,##0.## lux",
-        dataPoints: luminosityData,
-      },
-      {
-        type: "line",
-        showInLegend: true,
-        name: "Humidité du sol (%)",
+        name: "Hygrométrie (%)",
         xValueFormatString: "DD MMM HH:mm",
         yValueFormatString: "#,##0.## %",
         dataPoints: humidityData,
@@ -89,7 +69,67 @@ const ChartComponent: React.FC<ChartComponentProps> = ({ infos }) => {
     ],
   };
 
-  return <CanvasJSChart options={options} />;
+  const temperatureOptions = {
+    animationEnabled: true,
+    theme: "light2",
+    title: {
+      text: "Graphique Température",
+    },
+    axisX: {
+      title: "Temps",
+      valueFormatString: "DD MMM HH:mm",
+    },
+    axisY: {
+      title: "Température (°C)",
+      includeZero: false,
+    },
+    data: [
+      {
+        type: "line",
+        showInLegend: true,
+        color: "red",
+        name: "Température (°C)",
+        xValueFormatString: "DD MMM HH:mm",
+        yValueFormatString: "#,##0.## °C",
+        dataPoints: temperatureData,
+      },
+    ],
+  };
+
+  const luminosityOptions = {
+    animationEnabled: true,
+    theme: "light2",
+    title: {
+      text: "Graphique Luminosité",
+    },
+    axisX: {
+      title: "Temps",
+      valueFormatString: "DD MMM HH:mm",
+    },
+    axisY: {
+      title: "Luminosité (lux)",
+      includeZero: false,
+    },
+    data: [
+      {
+        type: "line",
+        color: "orange",
+        showInLegend: true,
+        name: "Luminosité (lux)",
+        xValueFormatString: "DD MMM HH:mm",
+        yValueFormatString: "#,##0.## lux",
+        dataPoints: luminosityData,
+      },
+    ],
+  };
+
+  return (
+    <>
+      <CanvasJSChart options={hygrometryOptions} />
+      <CanvasJSChart options={temperatureOptions} />
+      <CanvasJSChart options={luminosityOptions} />
+    </>
+  );
 };
 
 export default ChartComponent;

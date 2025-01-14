@@ -55,7 +55,6 @@ const InfosComponent: React.FC = () => {
 
   return (
     <>
-      <h2>Informations</h2>
       <div className="dateSelector">
         <div>
           <label>Date de début: </label>

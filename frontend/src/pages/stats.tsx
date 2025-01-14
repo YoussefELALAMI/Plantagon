@@ -3,8 +3,8 @@ import InfosComponent from "../components/InfosComponent";
 
 const Stats: React.FC = () => {
   return (
-    <div>
-      <h1>Welcome to the Stats page</h1>
+    <div className="flex col items-center">
+      <h1>Statistiques</h1>
       <InfosComponent />
     </div>
   );
