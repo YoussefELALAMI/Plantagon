@@ -43,6 +43,10 @@ p {
   gap: 10px;
 }
 
+.col {
+  flex-direction: column;
+}
+
 .material-icons {
   font-size: 1.8rem;
 }

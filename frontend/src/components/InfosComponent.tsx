@@ -10,13 +10,11 @@ import "./stats.css";
 const InfosComponent: React.FC = () => {
   const [infos, setInfos] = useState<PlantInfo[]>([]);
   const [startDate, setStartDate] = useState<string>(
-    new Date(new Date().getTime() - 7 * 24 * 60 * 60 * 1000)
-      .toISOString()
-      .slice(0, -8)
-  ); // Date de début
+    new Date("2025-01-01T00:00:00").toISOString().slice(0, -8)
+  );
   const [endDate, setEndDate] = useState<string>(
-    new Date().toISOString().slice(0, -8)
-  ); // Date de fin
+    new Date("2025-01-31T00:00:00").toISOString().slice(0, -8)
+  );
 
   useEffect(() => {
     console.log(startDate, endDate);
@@ -57,7 +55,6 @@ const InfosComponent: React.FC = () => {
 
   return (
     <>
-      <h2>Informations</h2>
       <div className="dateSelector">
         <div>
           <label>Date de début: </label>
