@@ -21,7 +21,7 @@ services:
     ports:
       - "5500:5500"
     command: >
-      sh -c "npm install && npm run dev"
+      sh -c "npm install && npm run build && npm run start"
 
 volumes:
   data:
