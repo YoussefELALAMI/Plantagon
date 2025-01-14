@@ -44,13 +44,15 @@ Code : `200 OK`
     "time": "2024-01-01T10:00",
     "temp": 22.5,
     "hygro": 55.1,
-    "lum": 350.0
+    "lum": 350.0,
+    "hum": 45.0
   },
   {
     "time": "2024-01-02T12:30",
     "temp": 23.0,
     "hygro": 50.0,
-    "lum": 400.0
+    "lum": 400.0,
+    "hum": 50.0
   }
 ]
 ```
@@ -83,7 +85,8 @@ Le corps de la requête doit être au format JSON avec les clés suivantes :
 | `time`  | String | Oui    | Date et heure au format `YYYY-MM-DDThh:mm`. |
 | `temp`  | Number | Oui    | Température en degrés Celsius.              |
 | `hygro` | Number | Oui    | Taux d'humidité en pourcentage.             |
-| `lum`   | Number | Oui    | Niveau de luminosité en unité arbitraire.   |
+| `lum`   | Number | Oui    | Niveau de luminosité en lux.                |
+| `hum`   | Number | Oui    | Niveau d'humidité en pourcentage.           |
 
 #### Exemple de requête
 
@@ -96,7 +99,8 @@ Content-Type: application/json
   "time": "2024-12-10T12:30",
   "temp": 22.5,
   "hygro": 60.2,
-  "lum": 500.5
+  "lum": 500.5,
+  "hum": 55.0
 }
 ```
 
@@ -112,12 +116,12 @@ Code : `201 Created`
 
 #### Gestion des erreurs
 
-| Code | Message                                                                      | Explication                                              |
-| ---- | ---------------------------------------------------------------------------- | -------------------------------------------------------- |
-| 400  | `{"error": "Les champs time, temp, hygro et lum sont requis."}`              | Champs manquants dans le corps de la requête.            |
-| 400  | `{"error": "Le champ time doit être au format YYYY-MM-DDThh:mm."}`           | Format de date invalide.                                 |
-| 400  | `{"error": "Les champs temp, hygro et lum doivent être des nombres réels."}` | Les valeurs ne sont pas valides.                         |
-| 500  | `{"error": "Erreur interne du serveur lors de l'insertion."}`                | Problème interne, généralement lié à la base de données. |
+| Code | Message                                                                           | Explication                                              |
+| ---- | --------------------------------------------------------------------------------- | -------------------------------------------------------- |
+| 400  | `{"error": "Les champs time, temp, hygro, lum et hum sont requis."}`              | Champs manquants dans le corps de la requête.            |
+| 400  | `{"error": "Le champ time doit être au format YYYY-MM-DDThh:mm."}`                | Format de date invalide.                                 |
+| 400  | `{"error": "Les champs temp, hygro, lum et hum doivent être des nombres réels."}` | Les valeurs ne sont pas valides.                         |
+| 500  | `{"error": "Erreur interne du serveur lors de l'insertion."}`                     | Problème interne, généralement lié à la base de données. |
 
 ---
 
@@ -136,7 +140,8 @@ Content-Type: application/json
   "time": "2024-12-10T12:30",
   "temp": 22.5,
   "hygro": 60.2,
-  "lum": 500.5
+  "lum": 500.5,
+  "hum": 55.0
 }
 ```
 
