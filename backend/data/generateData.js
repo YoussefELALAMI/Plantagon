@@ -30,23 +30,25 @@ function sendData(time, data) {
 }
 
 // Fonction pour générer et envoyer 200 données
-function generateAndSendData() {
-  let startDate = new Date("2025-01-01T00:00:00");
-  let endDate = new Date("2025-01-14T23:59:59");
+async function generateAndSendData() {
+  let startDate = new Date("2025-01-20T01:00:00");
+  let endDate = new Date("2025-01-31T23:59:59");
 
   let currentDate = startDate;
   let dataCount = 0;
 
   // Envoi de 200 données
-  while (dataCount < 200 && currentDate <= endDate) {
+  while (currentDate <= endDate) {
     const time = currentDate.toISOString().slice(0, -8); // Formate la date au format YYYY-MM-DDThh:mm
     const data = generateRandomData();
 
     // Envoi de la donnée
     sendData(time, data);
 
+    await new Promise((resolve) => setTimeout(resolve, 1000)); // Attendre 2 secondes
+
     // Incrémenter de 5 minutes
-    currentDate = new Date(currentDate.getTime() + 5 * 60000); // 5 minutes en millisecondes
+    currentDate = new Date(currentDate.getTime() + 120 * 60000); // 2h en millisecondes
     dataCount++;
   }
 }
