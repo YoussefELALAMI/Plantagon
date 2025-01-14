@@ -13,7 +13,7 @@ function infos(req: Request, res: Response): void {
 
   // Préparer la requête SQL
   const query = `
-        SELECT time, temp, hygro, lum 
+        SELECT time, temp, hygro, lum, hum 
         FROM plantData 
         WHERE time BETWEEN ? AND ? 
         ORDER BY time ASC

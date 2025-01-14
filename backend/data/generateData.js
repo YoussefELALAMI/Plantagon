@@ -3,7 +3,8 @@ function generateRandomData() {
   const temp = (Math.random() * (30 - 15) + 15).toFixed(1); // Température entre 15 et 30°C
   const hygro = (Math.random() * (80 - 50) + 50).toFixed(1); // Humidité entre 50% et 80%
   const lum = (Math.random() * (1000 - 100) + 100).toFixed(1); // Luminosité entre 100 et 1000 unités
-  return { temp, hygro, lum };
+  const hum = (Math.random() * (100 - 0) + 0).toFixed(1); // Humidité du sol entre 0 et 100%
+  return { temp, hygro, lum, hum };
 }
 
 // Fonction pour envoyer une donnée à l'endpoint /add-data
@@ -18,6 +19,7 @@ function sendData(time, data) {
       temp: data.temp,
       hygro: data.hygro,
       lum: data.lum,
+      hum: data.hum,
     }),
   })
     .then((response) => response.json())

@@ -1,17 +1,11 @@
 import React from "react";
 import CanvasJSReact from "@canvasjs/react-charts";
+import { PlantInfo } from "../types/PlantInfo";
 
 const CanvasJSChart = CanvasJSReact.CanvasJSChart;
 
-interface Info {
-  time: string; // Date au format ISO 8601
-  temp: number; // Température en °C
-  hygro: number; // Humidité en %
-  lum: number; // Luminosité en lux
-}
-
 interface ChartComponentProps {
-  infos: Info[];
+  infos: PlantInfo[];
 }
 
 const ChartComponent: React.FC<ChartComponentProps> = ({ infos }) => {
@@ -21,7 +15,7 @@ const ChartComponent: React.FC<ChartComponentProps> = ({ infos }) => {
     y: info.temp,
   }));
 
-  const humidityData = infos.map((info) => ({
+  const hygrometryData = infos.map((info) => ({
     x: new Date(info.time),
     y: info.hygro,
   }));
@@ -29,6 +23,11 @@ const ChartComponent: React.FC<ChartComponentProps> = ({ infos }) => {
   const luminosityData = infos.map((info) => ({
     x: new Date(info.time),
     y: info.lum,
+  }));
+
+  const humidityData = infos.map((info) => ({
+    x: new Date(info.time),
+    y: info.hum,
   }));
 
   // Options de configuration pour le graphique
@@ -69,7 +68,7 @@ const ChartComponent: React.FC<ChartComponentProps> = ({ infos }) => {
         name: "Humidité (%)",
         xValueFormatString: "DD MMM HH:mm",
         yValueFormatString: "#,##0.## %",
-        dataPoints: humidityData,
+        dataPoints: hygrometryData,
       },
       {
         type: "line",
@@ -78,6 +77,14 @@ const ChartComponent: React.FC<ChartComponentProps> = ({ infos }) => {
         xValueFormatString: "DD MMM HH:mm",
         yValueFormatString: "#,##0.## lux",
         dataPoints: luminosityData,
+      },
+      {
+        type: "line",
+        showInLegend: true,
+        name: "Humidité du sol (%)",
+        xValueFormatString: "DD MMM HH:mm",
+        yValueFormatString: "#,##0.## %",
+        dataPoints: humidityData,
       },
     ],
   };

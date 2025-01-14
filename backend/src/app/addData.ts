@@ -8,13 +8,19 @@ function addData(req: Request, res: Response): void {
   }
 
   // Récupérer les paramètres du corps de la requête
-  const { time, temp, hygro, lum } = req.body;
+  const { time, temp, hygro, lum, hum } = req.body;
 
   // Vérifier que tous les champs requis sont présents
-  if (!time || temp === undefined || hygro === undefined || lum === undefined) {
+  if (
+    !time ||
+    temp === undefined ||
+    hygro === undefined ||
+    lum === undefined ||
+    hum === undefined
+  ) {
     res
       .status(400)
-      .json({ error: "Les champs time, temp, hygro et lum sont requis." });
+      .json({ error: "Les champs time, temp, hygro, hum et lum sont requis." });
     return;
   }
 
@@ -34,32 +40,43 @@ function addData(req: Request, res: Response): void {
   const tempParsed = parseFloat(temp);
   const hygroParsed = parseFloat(hygro);
   const lumParsed = parseFloat(lum);
+  const humParsed = parseFloat(hum);
 
-  if (isNaN(tempParsed) || isNaN(hygroParsed) || isNaN(lumParsed)) {
+  if (
+    isNaN(tempParsed) ||
+    isNaN(hygroParsed) ||
+    isNaN(lumParsed) ||
+    isNaN(humParsed)
+  ) {
     res.status(400).json({
-      error: "Les champs temp, hygro et lum doivent être des nombres réels.",
+      error:
+        "Les champs temp, hygro, hum et lum doivent être des nombres réels.",
     });
     return;
   }
 
   // Préparer la requête SQL pour insérer les données
   const query = `
-      INSERT INTO plantData (time, temp, hygro, lum)
-      VALUES (?, ?, ?, ?)
+      INSERT INTO plantData (time, temp, hygro, lum, hum)
+      VALUES (?, ?, ?, ?, ?)
     `;
 
   // Exécuter la requête
-  db.run(query, [timeFormatted, tempParsed, hygroParsed, lumParsed], (err) => {
-    if (err) {
-      console.error("Erreur lors de l'insertion :", err.message);
-      return res
-        .status(500)
-        .json({ error: "Erreur interne du serveur lors de l'insertion." });
-    }
+  db.run(
+    query,
+    [timeFormatted, tempParsed, hygroParsed, lumParsed, humParsed],
+    (err) => {
+      if (err) {
+        console.error("Erreur lors de l'insertion :", err.message);
+        return res
+          .status(500)
+          .json({ error: "Erreur interne du serveur lors de l'insertion." });
+      }
 
-    // Retourner un message de succès
-    res.status(201).json({ message: "Données insérées avec succès." });
-  });
+      // Retourner un message de succès
+      res.status(201).json({ message: "Données insérées avec succès." });
+    }
+  );
 }
 
 export default addData;
