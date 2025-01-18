@@ -8,10 +8,11 @@ function addData(req: Request, res: Response): void {
   }
 
   // Récupérer les paramètres du corps de la requête
-  const { time, temp, hygro, lum, hum } = req.body;
+  const { plantId, time, temp, hygro, lum, hum } = req.body;
 
   // Vérifier que tous les champs requis sont présents
   if (
+    !plantId ||
     !time ||
     temp === undefined ||
     hygro === undefined ||
@@ -57,14 +58,13 @@ function addData(req: Request, res: Response): void {
 
   // Préparer la requête SQL pour insérer les données
   const query = `
-      INSERT INTO plantData (time, temp, hygro, lum, hum)
-      VALUES (?, ?, ?, ?, ?)
-    `;
+    INSERT INTO plantData (plant_id, time, temp, hygro, lum, hum)
+    VALUES (?, ?, ?, ?, ?, ?)
+  `;
 
-  // Exécuter la requête
   db.run(
     query,
-    [timeFormatted, tempParsed, hygroParsed, lumParsed, humParsed],
+    [plantId, timeFormatted, tempParsed, hygroParsed, lumParsed, humParsed],
     (err) => {
       if (err) {
         console.error("Erreur lors de l'insertion :", err.message);
@@ -73,7 +73,6 @@ function addData(req: Request, res: Response): void {
           .json({ error: "Erreur interne du serveur lors de l'insertion." });
       }
 
-      // Retourner un message de succès
       res.status(201).json({ message: "Données insérées avec succès." });
     }
   );
