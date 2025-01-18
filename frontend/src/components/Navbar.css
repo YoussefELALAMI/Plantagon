@@ -22,14 +22,45 @@
 
 /* Navbar Links */
 .navbar-links {
+  justify-content: center;
   display: flex;
   gap: 1.5rem;
   align-items: center;
   transition: transform 0.3s ease;
+  flex-grow: 1;
 }
 
-/* Hide Links on Smaller Screens */
-.navbar-links.active {
+/* Navbar Links visible when a plant is selected */
+.navbar-links a {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  text-decoration: none;
+  font-size: 1rem;
+  color: #333;
+  transition: color 0.3s ease, border-bottom 0.3s ease;
+}
+
+/* Hover effect for links */
+.navbar-links a:hover {
+  color: #000;
+}
+
+/* Burger Menu Icon */
+.burger-menu {
+  display: none;
+  flex-direction: column;
+  gap: 4px;
+  cursor: pointer;
+}
+
+.burger-menu .material-icons {
+  font-size: 2rem;
+  color: #333;
+}
+
+/* Show Links when Burger Menu is Open */
+.navbar-links.open {
   display: flex;
   position: absolute;
   top: 60px;
@@ -43,99 +74,19 @@
   z-index: 1000;
 }
 
-.navbar-link {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  text-decoration: none;
-  font-size: 1rem;
-  color: #333;
-  transition: color 0.3s ease, border-bottom 0.3s ease;
-}
-
-.navbar-link:hover {
-  color: #000;
-}
-
-/* Navbar Buttons */
-.navbar-buttons {
-  display: flex; /* Ensures buttons are visible on desktops */
-  gap: 1rem;
-  align-items: center;
-}
-
-.navbar-button {
-  padding: 0.5rem 1rem;
-  border: 2px solid #000;
-  background-color: transparent;
-  color: #000;
-  font-size: 1rem;
-  font-weight: bold;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
-
-.login-button {
-  background-color: transparent;
-}
-
-.signup-button {
-  background-color: #000;
-  color: #fff;
-}
-
-.navbar-button:hover {
-  background-color: #000;
-  color: #fff;
-}
-
-/* Burger Menu Icon */
-.burger-menu {
-  display: none;
-  flex-direction: column;
-  gap: 4px;
-  cursor: pointer;
-}
-
-.burger-icon {
-  width: 25px;
-  height: 3px;
-  background-color: #333;
-  border-radius: 2px;
-}
-
-/* Buttons in Dropdown for Mobile */
-.mobile-buttons {
-  display: none;
-}
-
-/* Show Buttons on Mobile Screens */
-.navbar-links.active .mobile-buttons {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-}
-
 /* Mobile Responsive */
 @media (max-width: 768px) {
   .navbar-links {
-    display: none;
+    display: none; /* Hidden by default */
   }
 
-  .navbar-links.active {
+  /* When the menu is open, display links */
+  .navbar-links.open {
     display: flex;
   }
 
+  /* Show Burger Menu only when a plant is selected */
   .burger-menu {
-    display: flex;
-  }
-
-  .navbar-buttons {
-    display: none; /* Hide buttons in the main navbar on mobile */
-  }
-
-  .mobile-buttons {
     display: flex;
   }
 }
