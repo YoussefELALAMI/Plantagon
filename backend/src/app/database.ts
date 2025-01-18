@@ -13,8 +13,34 @@ const db = new sqlite3.Database(dbPath, (err) => {
     );
   } else {
     console.log("Connecté à la base de données SQLite.");
+
+    // Création de la table des plantes 
+    db.run(
+      `CREATE TABLE IF NOT EXISTS plants (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        name TEXT UNIQUE NOT NULL,
+        type TEXT NOT NULL,
+        reference TEXT NOT NULL
+      );`
+    );
+
+    // db.run(`DROP TABLE IF EXISTS plantData;`); // This removes the old table
+
+     // Création de la table plantData avec une clé étrangère
+     db.run(
+      `CREATE TABLE IF NOT EXISTS plantData (
+        plant_id INTEGER NOT NULL,
+        time TEXT NOT NULL,
+        temp REAL NOT NULL,
+        hygro REAL NOT NULL,
+        lum REAL NOT NULL,
+        hum REAL NOT NULL,
+        FOREIGN KEY (plant_id) REFERENCES plants(id) ON DELETE CASCADE
+      );`
+    );    
   }
 });
+
 
 // Fermer la base de données proprement lors de la sortie
 process.on("SIGINT", () => {
