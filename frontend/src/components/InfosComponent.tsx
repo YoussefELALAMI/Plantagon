@@ -3,7 +3,7 @@ import { PlantInfo } from "../types/PlantInfo";
 import ChartsComponent from "./ChartsComponent";
 import { PlantContext } from "../context/PlantContext";
 import "./stats.css";
-const baseURL = "http://192.168.1.15:5500";
+const baseURL = "192.168.1.15:5500";
 
 /**
  * Component that fetches and displays plant information.
