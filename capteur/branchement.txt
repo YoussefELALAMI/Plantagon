@@ -1,0 +1,39 @@
+Raspberry :
+
+1 (3.3V) : 3.3V plaquette
+3 (GPIO 2 SDA) : capteur de luminosité SDA
+5 (GPIO 3 SCL)  : capteur de luminosité SCL
+6 (GND) : GND plaquette
+11 (GPIO 17) : donnée capteur DHT22 (à coté resistance)
+19 (GPIO 10 MOSI) : convertisseur DIN
+21 (GPIO 9 MISO) : convertisseur DOUT
+23 (GPIO 11SCLK) : convertisseur CLK
+24 (GPIO 8 CE0) : convertisseur CS/SHDN
+
+Convertisseur MCP3008
+MCP3008
+Pin 16 (VDD) : 3.3V plaquette
+Pin 15 (VREF) : 3.3V plaquette
+Pin 14 (AGND) : GND plaquette
+Pin 13 (CLK) : Raspberry 23 (GPIO 11SCLK)
+Pin 12 (DOUT) : Raspberry 21(GPIO 9 MISO)
+Pin 11 (DIN) : Raspberry 19(GPIO 10 MOSI)
+Pin 10 (CS/SHDN) : Raspberry  24 (GPIO 8 CE0)
+Pin 9 (DGND) :  GND plaquette
+Pin 0 : Data capteur hydrometrie des sols
+
+Capteur DHT22 :
+3.3V : plaquette 3.3V
+GND : plaquette GND
+Data : plaquette resistance 
+
+Capteur hydrometrie :
+GND : plaquette GND
+3.3V : plaquette 3.3V
+Data : capteur Pin 0
+
+Capteur Lumiere :
+GND : plaquette GND
+3.3V : plaquette 3.3V
+SDA : Raspberry 3 (GPIO 2 SDA) 
+SCL : Raspberry 5 (GPIO 3 SCL)  

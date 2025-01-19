@@ -23,8 +23,8 @@ frontend/build/             # Fichiers de build React
 frontend/.env               # Variables d'environnement
 
 # SQLite Database
-*.db                        # Fichiers de base de données SQLite
-*.db-journal                # Journaux temporaires SQLite
+backend/data/*.db           # Fichiers de base de données SQLite
+backend/data/*.db-journal   # Journaux temporaires SQLite
 
 # Python (Raspberry Pi)
 __pycache__/                # Fichiers compilés Python

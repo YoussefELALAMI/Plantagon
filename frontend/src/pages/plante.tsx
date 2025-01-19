@@ -26,13 +26,13 @@ const Plante: React.FC = () => {
     // Charger la liste des plantes au démarrage
     const fetchPlants = async () => {
       try {
-        const response = await fetch('http://localhost:5500/plants');
+        const response = await fetch("http://localhost:5500/plants");
         if (response.ok) {
           const data = await response.json();
           setPlants(data);
         }
       } catch (error) {
-        console.error('Erreur lors du chargement des plantes:', error);
+        console.error("Erreur lors du chargement des plantes:", error);
       }
     };
 
@@ -50,29 +50,26 @@ const Plante: React.FC = () => {
 
   const handleBackToList = () => {
     setSelectedPlant(null);
-    navigate("/");  // Redirection vers la liste des plantes
+    navigate("/"); // Redirection vers la liste des plantes
   };
 
   return (
     <div className="plante-container">
       <h1>Mes Plantes</h1>
-      
+
       {!selectedPlant ? (
-        <PlantList 
+        <PlantList
           plants={plants}
           onPlantSelect={handlePlantSelect}
           onAddPlant={handleAddPlant}
         />
       ) : (
         <div className="selected-plant-view">
-          <button 
-            className="back-button"
-            onClick={handleBackToList}
-          >
+          <button className="back-button" onClick={handleBackToList}>
             <span className="material-icons">arrow_back</span>
             Retour à la liste
           </button>
-          
+
           {plantInfo && (
             <>
               <div className="plant-info-header">
@@ -80,30 +77,39 @@ const Plante: React.FC = () => {
                 <p>Type: {selectedPlant.type}</p>
                 <p>Référence: {selectedPlant.reference}</p>
               </div>
-              
+
               <div className="plant-metrics">
                 <div className="metric-card">
                   <span className="material-icons">device_thermostat</span>
-                  <span className="value">{plantInfo.temp}°C</span>
+                  <span className="value">
+                    {plantInfo.temp.toPrecision(3)}°C
+                  </span>
                 </div>
                 <div className="metric-card">
                   <span className="material-icons">water_drop</span>
-                  <span className="value">{plantInfo.hygro}%</span>
+                  <span className="value">
+                    {plantInfo.hygro.toPrecision(3)}%
+                  </span>
                 </div>
                 <div className="metric-card">
                   <span className="material-icons">grass</span>
-                  <span className="value">{plantInfo.hum}%</span>
+                  <span className="value">{plantInfo.hum.toPrecision(3)}%</span>
                 </div>
                 <div className="metric-card">
                   <span className="material-icons">wb_sunny</span>
-                  <span className="value">{plantInfo.lum} lux</span>
+                  <span className="value">
+                    {plantInfo.lum.toPrecision(3)} lux
+                  </span>
                 </div>
               </div>
-              
+
               <PlantAnimationComponent plantInfo={plantInfo} />
             </>
           )}
-          <DataProviderComponent plantId={selectedPlant.id} onDataFetched={setPlantInfo} />
+          <DataProviderComponent
+            plantId={selectedPlant.id}
+            onDataFetched={setPlantInfo}
+          />
         </div>
       )}
     </div>
