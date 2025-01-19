@@ -7,14 +7,7 @@ import getLastInfo from "./getLastInfo";
 // Configuration du serveur
 const app = express();
 
-// Liste des origines autorisées
-const allowedOrigins = ["http://localhost:3000", "http://192.168.1.15:3000"];
-
-const options: cors.CorsOptions = {
-  origin: allowedOrigins,
-};
-
-app.use(cors(options));
+app.use(cors());
 app.use(express.json());
 
 // Endpoint : /infos?f=A&t=B
