@@ -9,10 +9,11 @@ function addData(req: Request, res: Response): void {
 
   // Récupérer les paramètres du corps de la requête
   const { plantId, time, temp, hygro, lum, hum } = req.body;
+  console.log(req.body);
 
   // Vérifier que tous les champs requis sont présents
   if (
-    plantId === undefined||
+    !plantId ||
     !time ||
     temp === undefined ||
     hygro === undefined ||
