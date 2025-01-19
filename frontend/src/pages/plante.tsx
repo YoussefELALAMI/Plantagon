@@ -26,7 +26,7 @@ const Plante: React.FC = () => {
     // Charger la liste des plantes au démarrage
     const fetchPlants = async () => {
       try {
-        const response = await fetch("http://localhost:5500/plants");
+        const response = await fetch("http://192.165.1.15:5500/plants");
         if (response.ok) {
           const data = await response.json();
           setPlants(data);
