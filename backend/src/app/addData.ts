@@ -12,7 +12,7 @@ function addData(req: Request, res: Response): void {
 
   // Vérifier que tous les champs requis sont présents
   if (
-    !plantId ||
+    plantId === undefined||
     !time ||
     temp === undefined ||
     hygro === undefined ||
