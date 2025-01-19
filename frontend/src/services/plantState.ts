@@ -1,42 +1,51 @@
-import { PlantInfo } from '../types/PlantInfo';
+import { PlantInfo } from "../types/PlantInfo";
 
 export const plantState = (plantInfo: PlantInfo) => {
+  let waterState = "";
+  let lightState = "";
+  let tempState = "";
+  let humState = "";
 
-    const { time, temp, hygro, lum } = plantInfo;
-    let waterState = '';
-    let lightState = '';
-    let tempState = '';
+  // Water states
+  if (plantInfo.hygro < 60) {
+    waterState = "Dry";
+  } else if (plantInfo.hygro >= 60 && plantInfo.hygro <= 80) {
+    waterState = "Optimal";
+  } else {
+    waterState = "Wet";
+  }
 
-    // Water states
-    if (hygro < 60) {
-        waterState = 'Dry';
-    } else if (hygro >= 60 && hygro <= 80) {
-        waterState = 'Optimal';
-    } else {
-        waterState = 'Wet';
-    }
+  // Light states
+  if (plantInfo.lum < 500) {
+    lightState = "Dark";
+  } else if (plantInfo.lum >= 500 && plantInfo.lum <= 1500) {
+    lightState = "Optimal";
+  } else {
+    lightState = "Light";
+  }
 
-    // Light states
-    if (lum < 500) {
-        lightState = 'Dark';
-    } else if (lum >= 500 && lum <= 1500) {
-        lightState = 'Optimal';
-    } else {
-        lightState = 'Light';
-    }
+  // Temperature states
+  if (plantInfo.temp < 20) {
+    tempState = "Cold";
+  } else if (plantInfo.temp >= 20 && plantInfo.temp <= 28) {
+    tempState = "Optimal";
+  } else {
+    tempState = "Hot";
+  }
 
-    // Temperature states
-    if (temp < 20) {
-        tempState = 'Cold';
-    } else if (temp >= 20 && temp <= 28) {
-        tempState = 'Optimal';
-    } else {
-        tempState = 'Hot';
-    }
+  // Humidity states
+  if (plantInfo.hum < 40) {
+    humState = "Dry";
+  } else if (plantInfo.hum >= 40 && plantInfo.hum <= 60) {
+    humState = "Optimal";
+  } else {
+    humState = "Wet";
+  }
 
-    return {
-        waterState,
-        lightState,
-        tempState
-    };
-}
+  return {
+    waterState,
+    lightState,
+    tempState,
+    humState,
+  };
+};

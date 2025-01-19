@@ -3,7 +3,8 @@ function generateRandomData() {
   const temp = (Math.random() * (30 - 15) + 15).toFixed(1); // Température entre 15 et 30°C
   const hygro = (Math.random() * (80 - 50) + 50).toFixed(1); // Humidité entre 50% et 80%
   const lum = (Math.random() * (1000 - 100) + 100).toFixed(1); // Luminosité entre 100 et 1000 unités
-  return { temp, hygro, lum };
+  const hum = (Math.random() * (100 - 0) + 0).toFixed(1); // Humidité du sol entre 0 et 100%
+  return { temp, hygro, lum, hum };
 }
 
 // Fonction pour envoyer une donnée à l'endpoint /add-data
@@ -18,6 +19,7 @@ function sendData(time, data) {
       temp: data.temp,
       hygro: data.hygro,
       lum: data.lum,
+      hum: data.hum,
     }),
   })
     .then((response) => response.json())
@@ -28,23 +30,25 @@ function sendData(time, data) {
 }
 
 // Fonction pour générer et envoyer 200 données
-function generateAndSendData() {
-  let startDate = new Date("2025-01-01T00:00:00");
-  let endDate = new Date("2025-01-14T23:59:59");
+async function generateAndSendData() {
+  let startDate = new Date("2025-01-20T01:00:00");
+  let endDate = new Date("2025-01-31T23:59:59");
 
   let currentDate = startDate;
   let dataCount = 0;
 
   // Envoi de 200 données
-  while (dataCount < 200 && currentDate <= endDate) {
+  while (currentDate <= endDate) {
     const time = currentDate.toISOString().slice(0, -8); // Formate la date au format YYYY-MM-DDThh:mm
     const data = generateRandomData();
 
     // Envoi de la donnée
     sendData(time, data);
 
+    await new Promise((resolve) => setTimeout(resolve, 1000)); // Attendre 2 secondes
+
     // Incrémenter de 5 minutes
-    currentDate = new Date(currentDate.getTime() + 5 * 60000); // 5 minutes en millisecondes
+    currentDate = new Date(currentDate.getTime() + 120 * 60000); // 2h en millisecondes
     dataCount++;
   }
 }
