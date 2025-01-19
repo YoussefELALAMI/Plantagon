@@ -34,12 +34,14 @@ def readDataHumidityAndTemperature():
 #   "hygro": 60.2,
 #   "lum": 500.5
 # }
+
+
 def sendData(hygro, temp, lum,hydro):
     try:
         # Send the angles to the server
 
         # URL du serveur Node.js
-        url = "http://localhost:5500/add-data"
+        url = "http://192.168.1.15:5500/add-data"
 
         # Données à envoyer
         payload = {
@@ -59,7 +61,7 @@ def sendData(hygro, temp, lum,hydro):
         response = requests.post(url, json=payload, headers=headers)
 
         # Vérification de la réponse
-        if response.status_code == 200:
+        if response.status_code in [200, 201]:
             print("Données envoyées avec succès :", response.json())
         else:
             print(f"Erreur: {response.status_code}, {response.text}")
@@ -82,7 +84,7 @@ while True:
     hydro = readHumidity()
     print(f"Temperature: {temp:.2f}°C, Hygrometry: {hygro:.2f}%, Luminosity: {lum:.2f} lux, Humidity: {hydro:.2f}%")
     sendData(hygro, temp, lum,hydro)
-    time.sleep(MAIN_LOOP_DELAY)
+    time.sleep(5)
 
 
 
