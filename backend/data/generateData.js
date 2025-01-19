@@ -8,7 +8,7 @@ function generateRandomData() {
 
 // Fonction pour envoyer une donnée à l'endpoint /add-data
 function sendData(time, data) {
-  fetch("http://localhost:5500/add-data", {
+  fetch(`http://${baseURL}/add-data`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",

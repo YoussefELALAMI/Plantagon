@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { PlantInfo } from "../types/PlantInfo";
 import ChartsComponent from "./ChartsComponent";
 import "./stats.css";
+const baseURL = process.env.REACT_APP_BASE_URL;
 
 /**
  * Component that fetches and displays plant information.
@@ -27,7 +28,7 @@ const InfosComponent: React.FC = () => {
           return;
         }
 
-        const url = `http://localhost:5500/infos?f=${encodeURIComponent(
+        const url = `${baseURL}/infos?f=${encodeURIComponent(
           startDate
         )}&t=${encodeURIComponent(endDate)}`;
         const response = await fetch(url);
