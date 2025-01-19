@@ -9,7 +9,13 @@ import struct
 IP_SERVER = "192.168.1.15"
 PORT_SERVER = 8080
 BUFFER_SIZE = 16384
-MAIN_LOOP_DELAY = 5 # delay in seconds to read the socket
+MAIN_LOOP_DELAY = 60 # delay in seconds to read the socket
+
+def get_local_ip():
+    with socket.socket(socket.AF_INET, socket.SOCK_DGRAM) as s:
+        s.connect(("8.8.8.8", 80))
+        return s.getsockname()[0]
+
 
 # Function to read the data from the sensor
 def readDataHumidityAndTemperature():
@@ -74,6 +80,8 @@ UDPServerSocket = socket.socket(family=socket.AF_INET, type=socket.SOCK_DGRAM)
 
 # Bind to address and ip
 UDPServerSocket.bind((IP_SERVER, PORT_SERVER))
+IP_SERVER = get_local_ip()
+print(f"UDP server up and listening on {IP_SERVER}:{PORT_SERVER}")
 print("UDP server up and listening")
 
 
@@ -84,7 +92,7 @@ while True:
     hydro = readHumidity()
     print(f"Temperature: {temp:.2f}°C, Hygrometry: {hygro:.2f}%, Luminosity: {lum:.2f} lux, Humidity: {hydro:.2f}%")
     sendData(hygro, temp, lum,hydro)
-    time.sleep(5)
+    time.sleep(MAIN_LOOP_DELAY)
 
 
 
