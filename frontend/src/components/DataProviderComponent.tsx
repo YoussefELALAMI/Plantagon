@@ -15,7 +15,7 @@ const DataProviderComponent: React.FC<DataProviderProps> = ({
   useEffect(() => {
     const fetchLastData = async () => {
       try {
-        const response = await fetch("http://localhost:5500/plants"); // D'abord, récupérons les informations de base de la plante
+        const response = await fetch("http://192.168.1.15:5500/plants"); // D'abord, récupérons les informations de base de la plante
         if (!response.ok)
           throw new Error(
             "Impossible de récupérer les informations des plantes"
