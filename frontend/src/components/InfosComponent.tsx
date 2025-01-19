@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { PlantInfo } from "../types/PlantInfo";
 import ChartsComponent from "./ChartsComponent";
 import "./stats.css";
-const baseURL = process.env.REACT_APP_BASE_URL;
+const baseURL = "http://192.168.1.15:5500";
 
 /**
  * Component that fetches and displays plant information.
