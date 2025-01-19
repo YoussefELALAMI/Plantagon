@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { PlantInfo } from "../types/PlantInfo";
 import ChartsComponent from "./ChartsComponent";
+import { PlantContext } from "../context/PlantContext";
 import "./stats.css";
 const baseURL = "http://192.168.1.15:5500";
 
@@ -16,9 +17,17 @@ const InfosComponent: React.FC = () => {
   const [endDate, setEndDate] = useState<string>(
     new Date("2025-01-31T00:00:00").toISOString().slice(0, -8)
   );
+  const context = useContext(PlantContext);
+
+  if (!context) {
+    throw new Error("Plante must be used within a PlantProvider");
+  }
+
+  const { selectedPlant } = context;
 
   useEffect(() => {
     console.log(startDate, endDate);
+    console.log(selectedPlant);
     const fetchInfos = async () => {
       try {
         if (!startDate || !endDate) {
@@ -26,9 +35,9 @@ const InfosComponent: React.FC = () => {
           return;
         }
 
-        const url = `${baseURL}/infos?f=${encodeURIComponent(
-          startDate
-        )}&t=${encodeURIComponent(endDate)}`;
+        const url = `http://${baseURL}/infos?plantId=${
+          selectedPlant?.id
+        }&f=${encodeURIComponent(startDate)}&t=${encodeURIComponent(endDate)}`;
         const response = await fetch(url);
 
         if (!response.ok) {
