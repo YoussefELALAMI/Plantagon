@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { PlantInfo } from "../types/PlantInfo";
-const baseURL = process.env.REACT_APP_BACKEND_URL;
+const baseURL = "192.168.1.15:5500";
 
 interface DataProviderProps {
   onDataFetched: (info: PlantInfo) => void;
