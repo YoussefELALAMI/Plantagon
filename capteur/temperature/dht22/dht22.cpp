@@ -1,6 +1,6 @@
 /*
 Compile with 
-    g++ dht22.cpp dht22lib.cpp -lwiringPi -DDEBUG -o dht22.exe
+g++ -std=c++14 dht22.cpp dht22lib.cpp -lwiringPi -o dht22.exe
 */
 
 
