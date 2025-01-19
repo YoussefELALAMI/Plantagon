@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Plant } from '../types/Plant';
+import './PlantList.css';
 
 interface PlantListProps {
   plants: Plant[];
@@ -10,10 +11,13 @@ interface PlantListProps {
 const PlantList: React.FC<PlantListProps> = ({ plants, onPlantSelect, onAddPlant }) => {
   const [showAddForm, setShowAddForm] = useState(false);
   const [newPlant, setNewPlant] = useState<Plant>({
-    id: 0,
+    id: '',
     name: '',
     type: '',
-    reference: ''
+    reference_humidite: 0,
+    reference_temperature: 0,
+    reference_luminosite: 0,
+    reference_humidite_sol: 0,
   });
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -30,7 +34,7 @@ const PlantList: React.FC<PlantListProps> = ({ plants, onPlantSelect, onAddPlant
       if (response.ok) {
         const addedPlant = await response.json();
         onAddPlant(addedPlant);
-        setNewPlant({id: 0 , name: '', type: '', reference: '' });
+        setNewPlant({id: '' , name: '', type: '', reference_humidite: 0, reference_temperature: 0, reference_luminosite: 0, reference_humidite_sol: 0});
         setShowAddForm(false);
       }
     } catch (error) {
@@ -48,8 +52,8 @@ const PlantList: React.FC<PlantListProps> = ({ plants, onPlantSelect, onAddPlant
             onClick={() => onPlantSelect(plant)}
           >
             <h3>{plant.name}</h3>
+            <p>Adresse IP : {plant.id}</p>
             <p>Type: {plant.type}</p>
-            <p>Réf: {plant.reference}</p>
           </div>
         ))}
         
@@ -66,6 +70,12 @@ const PlantList: React.FC<PlantListProps> = ({ plants, onPlantSelect, onAddPlant
               <h2>Ajouter une nouvelle plante</h2>
               <input
                 type="text"
+                placeholder="Adresse IP"
+                value={newPlant.id}
+                onChange={(e) => setNewPlant({...newPlant, id: e.target.value})}
+              />
+              <input
+                type="text"
                 placeholder="Nom de la plante"
                 value={newPlant.name}
                 onChange={(e) => setNewPlant({...newPlant, name: e.target.value})}
@@ -76,11 +86,33 @@ const PlantList: React.FC<PlantListProps> = ({ plants, onPlantSelect, onAddPlant
                 value={newPlant.type}
                 onChange={(e) => setNewPlant({...newPlant, type: e.target.value})}
               />
+              <h4>Référence humidité </h4>
               <input
                 type="text"
-                placeholder="Référence"
-                value={newPlant.reference}
-                onChange={(e) => setNewPlant({...newPlant, reference: e.target.value})}
+                placeholder="Référence humidité"
+                value={newPlant.reference_humidite}
+                onChange={(e) => setNewPlant({...newPlant, reference_humidite: Number(e.target.value)})}
+              /> 
+              <h4>Référence température </h4>
+              <input
+                type="text"
+                placeholder="Référence température"
+                value={newPlant.reference_temperature}
+                onChange={(e) => setNewPlant({...newPlant, reference_temperature: Number(e.target.value)})}
+              />
+              <h4>Référence luminosité </h4>
+              <input
+                type="text"
+                placeholder="Référence luminosité"
+                value={newPlant.reference_luminosite}
+                onChange={(e) => setNewPlant({...newPlant, reference_luminosite: Number(e.target.value)})}
+              />
+              <h4>Référence humidité sol </h4>
+              <input
+                type="text"
+                placeholder="Référence humidité sol"
+                value={newPlant.reference_humidite_sol}
+                onChange={(e) => setNewPlant({...newPlant, reference_humidite_sol: Number(e.target.value)})}
               />
               <div className="button-group">
                 <button type="submit">Ajouter</button>

@@ -78,7 +78,6 @@ const Plante: React.FC = () => {
               <div className="plant-info-header">
                 <h2>{selectedPlant.name}</h2>
                 <p>Type: {selectedPlant.type}</p>
-                <p>Référence: {selectedPlant.reference}</p>
               </div>
               
               <div className="plant-metrics">

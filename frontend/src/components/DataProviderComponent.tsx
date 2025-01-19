@@ -3,7 +3,7 @@ import { PlantInfo } from '../types/PlantInfo';
 import { Plant } from '../types/Plant';
 
 interface DataProviderProps {
-  plantId: number;
+  plantId: string;
   onDataFetched: (plantInfo: PlantInfo, plantDetails: Plant) => void;
 }
 
