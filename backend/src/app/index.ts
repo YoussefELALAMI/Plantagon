@@ -8,7 +8,7 @@ import getLastInfo from "./getLastInfo";
 const app = express();
 
 // Liste des origines autorisées
-const allowedOrigins = ["http://localhost:3000", "http://192.168.1.15"];
+const allowedOrigins = ["http://localhost:3000", "http://192.168.1.15:3000"];
 
 const options: cors.CorsOptions = {
   origin: allowedOrigins,
