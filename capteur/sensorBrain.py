@@ -51,7 +51,7 @@ def sendData(hygro, temp, lum,hydro):
 
         # Données à envoyer
         payload = {
-            "plantId": IP_SERVER,
+            "plant_id": IP_SERVER,
             "time": time.strftime("%Y-%m-%dT%H:%M:%S"),
             "temp": temp,
             "hygro": hygro,
