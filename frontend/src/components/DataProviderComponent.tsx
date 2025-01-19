@@ -12,6 +12,7 @@ const DataProviderComponent: React.FC<DataProviderProps> = ({
   useEffect(() => {
     const fetchLastData = async () => {
       try {
+        console.log(baseURL);
         const response = await fetch(`${baseURL}/last-info`); // Appelle l'endpoint backend
         if (!response.ok) throw new Error("Failed to fetch last plant data");
 
