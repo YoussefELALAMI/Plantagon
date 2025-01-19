@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { Plant } from '../types/Plant';
 import './PlantList.css';
-
 interface PlantListProps {
   plants: Plant[];
   onPlantSelect: (plant: Plant) => void;
@@ -23,7 +22,7 @@ const PlantList: React.FC<PlantListProps> = ({ plants, onPlantSelect, onAddPlant
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      const response = await fetch('http://localhost:5500/add-plant', {
+      const response = await fetch('http://192.168.1.15:5500/add-plant', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
