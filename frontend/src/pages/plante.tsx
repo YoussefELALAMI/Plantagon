@@ -17,19 +17,25 @@ const Plante: React.FC = () => {
               <span className="material-icons text-red-500">
                 device_thermostat
               </span>
-              <span className="font-bold">{plantInfo.temp}°C</span>
+              <span className="font-bold">
+                {plantInfo.temp.toPrecision(3)}°C
+              </span>
             </div>
             <div className="flex items-center gap-2">
               <span className="material-icons text-blue-500">water_drop</span>
-              <span className="font-bold">{plantInfo.hygro}%</span>
+              <span className="font-bold">
+                {plantInfo.hygro.toPrecision(3)}%
+              </span>
             </div>
             <div className="flex items-center gap-2">
               <span className="material-icons text-green-500">wb_grass</span>
-              <span className="font-bold">{plantInfo.hum}%</span>
+              <span className="font-bold">{plantInfo.hum.toPrecision(3)}%</span>
             </div>
             <div className="flex items-center gap-2">
               <span className="material-icons text-yellow-500">wb_sunny</span>
-              <span className="font-bold">{plantInfo.lum} lux</span>
+              <span className="font-bold">
+                {plantInfo.lum.toPrecision(3)} lux
+              </span>
             </div>
           </div>
 
