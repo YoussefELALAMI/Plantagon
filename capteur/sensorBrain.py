@@ -60,6 +60,8 @@ def sendData(hygro, temp, lum,hydro):
 
         }
 
+        print("Sending data to server:", payload)
+
         # En-têtes HTTP
         headers = {
             "Content-Type": "application/json"
