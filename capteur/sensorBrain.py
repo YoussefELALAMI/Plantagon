@@ -51,6 +51,7 @@ def sendData(hygro, temp, lum,hydro):
 
         # Données à envoyer
         payload = {
+            "plantId": IP_SERVER,
             "time": time.strftime("%Y-%m-%dT%H:%M:%S"),
             "temp": temp,
             "hygro": hygro,
@@ -81,8 +82,7 @@ UDPServerSocket = socket.socket(family=socket.AF_INET, type=socket.SOCK_DGRAM)
 # Bind to address and ip
 UDPServerSocket.bind((IP_SERVER, PORT_SERVER))
 IP_SERVER = get_local_ip()
-print(f"UDP server up and listening on {IP_SERVER}:{PORT_SERVER}")
-print("UDP server up and listening")
+print(f"UDP server up and listening on {IP_SERVER}")
 
 
 # Main loop
