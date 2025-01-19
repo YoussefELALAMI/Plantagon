@@ -2,7 +2,7 @@ import { Request, Response } from "express";
 import db from "./database";
 
 function getLastInfo(req: Request, res: Response): void {
-  const plantId = parseInt(req.query.plantId as string, 10);
+  const plantId = req.query.plantId;
 
   if (!plantId) {
     res.status(400).json({ error: "Le paramètre plantId est requis." });

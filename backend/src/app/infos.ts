@@ -4,7 +4,7 @@ import { PlantData } from "./types";
 
 function infos(req: Request, res: Response): void {
   const { plantId, f, t } = req.query;
-  const plant_id = parseInt(plantId as string, 10);
+  const plant_id = plantId;
 
   if (!plantId) {
     res.status(400).json({ error: "Le plant_id est requis." });

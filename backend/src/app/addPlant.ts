@@ -7,16 +7,16 @@ function addPlant(req: Request, res: Response): void {
         return;
     }
     
-    const { name, type, reference } = req.body;
+    const { id, name, type, reference_humidite, reference_temperature, reference_luminosite, reference_humidite_sol } = req.body;
 
-    if (!name || !type || !reference) {
+    if ( !id || !name || !type || !reference_humidite || !reference_temperature || !reference_luminosite || !reference_humidite_sol ) {
         res.status(400).json({ error: "Les champs name, type et reference sont requis." });
         return;
     }
 
-    const query = `INSERT INTO plants (name, type, reference) VALUES (?, ?, ?)`;
+    const query = `INSERT INTO plants (id, name, type, reference_humidite, reference_temperature, reference_luminosite, reference_humidite_sol) VALUES (?, ?, ?, ?, ?, ?, ?)`;
 
-    db.run(query, [name, type, reference], function (err) {
+    db.run(query, [id, name, type, reference_humidite, reference_temperature, reference_luminosite, reference_humidite_sol], function(err) {
         if (err) {
           console.error("Erreur lors de l'ajout de la plante :", err.message);
           res.status(500).json({ error: "Erreur interne du serveur." });

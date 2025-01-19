@@ -4,7 +4,7 @@ import { Plant } from "../types/Plant";
 const baseURL = "http://192.168.1.15:5500";
 
 interface DataProviderProps {
-  plantId: number;
+  plantId: string;
   onDataFetched: (plantInfo: PlantInfo, plantDetails: Plant) => void;
 }
 
