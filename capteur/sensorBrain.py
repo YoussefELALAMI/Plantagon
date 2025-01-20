@@ -82,8 +82,8 @@ def sendData(hygro, temp, lum,hydro):
 UDPServerSocket = socket.socket(family=socket.AF_INET, type=socket.SOCK_DGRAM)
 
 # Bind to address and ip
-UDPServerSocket.bind((IP_SERVER, PORT_SERVER))
 IP_SERVER = get_local_ip()
+UDPServerSocket.bind((IP_SERVER, PORT_SERVER))
 IP_SERVER = "ip"
 print(f"UDP server up and listening on {IP_SERVER}")
 
