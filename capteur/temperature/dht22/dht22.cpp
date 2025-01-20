@@ -13,7 +13,7 @@ g++ -std=c++14 dht22.cpp dht22lib.cpp -lwiringPi -o dht22.exe
 
 
 #define PORT 8080
-#define IP_ADRESS "192.168.1.15"
+#define IP_ADRESS "192.168.181.34"
 #define PIN 17
 #define WAIT_BETWEEN_MEASURES 5000
 
