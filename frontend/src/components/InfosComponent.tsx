@@ -37,7 +37,7 @@ const InfosComponent: React.FC = () => {
           return;
         }
 
-        const url = `http://${IP_ADRESS}/infos?plantId=${
+        const url = `http://${IP_ADRESS}:5500/infos?plantId=${
           selectedPlant?.id
         }&f=${encodeURIComponent(startDate)}&t=${encodeURIComponent(endDate)}`;
         const response = await fetch(url);
