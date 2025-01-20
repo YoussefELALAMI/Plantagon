@@ -1,10 +1,6 @@
 import spidev
 import time
 
-# # Configuration SPI
-# spi = spidev.SpiDev()
-# spi.open(0, 0)  # Bus 0, Device 0 (CE0)
-# spi.max_speed_hz = 1350000
 
 MAX_VOLTAGE = 2.6
 MIN_VOLTAGE = 1.25
@@ -45,14 +41,3 @@ def readHumidity():
         return humidity
     except KeyboardInterrupt:
         spi.close()
-# Lecture d'un canal en boucle
-# try:
-#     while True:
-#         channel_0_value = read_channel(0)
-#         voltage = (channel_0_value * 3.3) / 4095  # Conversion en tension (3.3V max)
-#         print(f"Canal 0 : Valeur brute = {channel_0_value}, Tension = {voltage:.2f}V")
-#         humidity = compute_humidity(voltage)
-#         print(f"Humidité relative : {humidity:.2f}%")
-#         time.sleep(1)
-# except KeyboardInterrupt:
-#     spi.close()

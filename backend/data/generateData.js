@@ -9,7 +9,7 @@ function generateRandomData() {
 
 // Fonction pour envoyer une donnée à l'endpoint /add-data
 function sendData(time, data) {
-  fetch(`http://192.168.15.45:5500/add-data`, {
+  fetch(`http://192.168.181.34:5500/add-data`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",

@@ -32,17 +32,6 @@ def readDataHumidityAndTemperature():
         return None, None
 
     return data
-#POST /add-data HTTP/1.1
-# Host: localhost:5500
-# Content-Type: application/json
-
-# {
-#   "time": "2024-12-10T12:30",
-#   "temp": 22.5,
-#   "hygro": 60.2,
-#   "lum": 500.5
-# }
-
 
 def sendData(hygro, temp, lum,hydro):
     try:

@@ -22,7 +22,7 @@ Voici la structure de ce projet :
 plantagon/ \
 ├── frontend/ # Contiendra le code React pour l'interface utilisateur\
 ├── backend/ # Contiendra le Serveur Node.js avec base SQLite\
-├── raspberry-pi/ # Contiendra les scripts Python la gestion des capteurs\
+├── capteur/ # Contiendra les scripts Python la gestion des capteurs\
 └── README.md # Documentation principale
 
 ---
