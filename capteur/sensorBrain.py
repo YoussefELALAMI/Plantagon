@@ -50,6 +50,7 @@ def sendData(hygro, temp, lum,hydro):
 
         # URL du serveur Node.js
         url = "http:// " + IP_SERVER + ":5500/add-data"
+        print(url)
 
         # Données à envoyer
         payload = {
