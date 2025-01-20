@@ -66,7 +66,9 @@ void sendData(int sock, float data[2],size_t dataSize ) {
     serv_addr.sin_family = AF_INET;
     serv_addr.sin_port = htons(PORT);
     inet_pton(AF_INET, IP_ADRESS, &serv_addr.sin_addr);
+    printf("Sending data to %s:%d\n", IP_ADRESS, PORT);
     sendto(sock, data, dataSize, 0, (struct sockaddr*)&serv_addr, sizeof(serv_addr));
+    printf("Data sent\n");
 }
 
 int main(int argc, char *argv[])
