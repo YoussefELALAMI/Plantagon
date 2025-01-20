@@ -152,9 +152,3 @@ Content-Type: application/json
   "message": "Données insérées avec succès."
 }
 ```
-
----
-
-## Auteur
-
-Antonin Litschgy
