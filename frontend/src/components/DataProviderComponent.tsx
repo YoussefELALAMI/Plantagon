@@ -1,7 +1,9 @@
 import React, { useEffect } from "react";
 import { PlantInfo } from "../types/PlantInfo";
 import { Plant } from "../types/Plant";
+import {IP_ADRESS} from "../config";
 const baseURL = "192.168.1.15:5500";
+
 
 interface DataProviderProps {
   plantId: string;
@@ -15,7 +17,7 @@ const DataProviderComponent: React.FC<DataProviderProps> = ({
   useEffect(() => {
     const fetchLastData = async () => {
       try {
-        const response = await fetch("http://192.168.1.15:5500/plants"); // D'abord, récupérons les informations de base de la plante
+        const response = await fetch(`http://${IP_ADRESS}:5500/plants`); // D'abord, récupérons les informations de base de la plante
         if (!response.ok)
           throw new Error(
             "Impossible de récupérer les informations des plantes"
@@ -31,8 +33,8 @@ const DataProviderComponent: React.FC<DataProviderProps> = ({
 
         // Ensuite, on récupère les dernières données des capteurs
         const sensorResponse = await fetch(
-          //`http://${baseURL}/last-info?plantId=${plantId}`
-            `http://192.168.1.15:5500/last-info?plantId=${plantId}`
+          `http://${IP_ADRESS}:5500/last-info?plantId=${plantId}`
+            //`http://192.168.1.15:5500/last-info?plantId=${plantId}`
  
         );
         if (!sensorResponse.ok) {

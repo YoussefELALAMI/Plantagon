@@ -7,6 +7,8 @@ import { Plant } from "../types/Plant";
 import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { PlantContext } from "../context/PlantContext";
+import {IP_ADRESS} from "../config";
+
 import "./styles/plante.css";
 
 const Plante: React.FC = () => {
@@ -26,7 +28,7 @@ const Plante: React.FC = () => {
     // Charger la liste des plantes au démarrage
     const fetchPlants = async () => {
       try {
-        const response = await fetch("http://192.168.1.15:5500/plants");
+        const response = await fetch(`http://${IP_ADRESS}:5500/plants`);
         if (response.ok) {
           const data = await response.json();
           setPlants(data);

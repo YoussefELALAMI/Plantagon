@@ -13,7 +13,7 @@ g++ -std=c++14 dht22.cpp dht22lib.cpp -lwiringPi -o dht22.exe
 
 
 #define PORT 8080
-#define IP_ADRESS "192.168.1.15"
+#define IP_ADRESS "192.168.181.34"
 #define PIN 17
 #define WAIT_BETWEEN_MEASURES 5000
 
@@ -66,7 +66,9 @@ void sendData(int sock, float data[2],size_t dataSize ) {
     serv_addr.sin_family = AF_INET;
     serv_addr.sin_port = htons(PORT);
     inet_pton(AF_INET, IP_ADRESS, &serv_addr.sin_addr);
+    printf("Sending data to %s:%d\n", IP_ADRESS, PORT);
     sendto(sock, data, dataSize, 0, (struct sockaddr*)&serv_addr, sizeof(serv_addr));
+    printf("Data sent\n");
 }
 
 int main(int argc, char *argv[])
