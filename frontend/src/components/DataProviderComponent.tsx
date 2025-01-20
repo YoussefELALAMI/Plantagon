@@ -1,8 +1,8 @@
 import React, { useEffect } from "react";
 import { PlantInfo } from "../types/PlantInfo";
 import { Plant } from "../types/Plant";
-const baseURL = "192.168.1.15:5500";
 import {IP_ADRESS} from "../config";
+const baseURL = "192.168.1.15:5500";
 
 
 interface DataProviderProps {
