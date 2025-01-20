@@ -19,8 +19,10 @@ def get_local_ip():
 
 # Function to read the data from the sensor
 def readDataHumidityAndTemperature():
+    print("Waiting for data from sensor...")
     # Receive the humidity and temperature from the sensor
     data, addr = UDPServerSocket.recvfrom(BUFFER_SIZE)
+    print("Received data from sensor:", data)
     if len(data) == 8:  # 2 floats = 8 bytes
         temp, humidity = struct.unpack('ff', data)  # 'ff' signifie deux floats
         print(f"Received from sensor - Temperature: {temp:.2f}°C, Humidity: {humidity:.2f}%")
@@ -47,7 +49,7 @@ def sendData(hygro, temp, lum,hydro):
         # Send the angles to the server
 
         # URL du serveur Node.js
-        url = "http://192.168.1.15:5500/add-data"
+        url = "http:// " + IP_SERVER + ":5500/add-data"
 
         # Données à envoyer
         payload = {
@@ -91,6 +93,7 @@ print(f"UDP server up and listening on {IP_SERVER}")
 
 # Main loop
 while True:
+    print("Reading data from sensors...")
     temp, hygro = readDataHumidityAndTemperature()
     lum = readLuminosity()
     hydro = readHumidity()
