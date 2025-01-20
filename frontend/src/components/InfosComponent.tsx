@@ -3,7 +3,7 @@ import { PlantInfo } from "../types/PlantInfo";
 import ChartsComponent from "./ChartsComponent";
 import { PlantContext } from "../context/PlantContext";
 import "./stats.css";
-import {IP_ADRESS} from "../../../config";
+import {IP_ADRESS} from "../config";
 
 const baseURL = "192.168.1.15:5500";
 

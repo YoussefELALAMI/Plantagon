@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Plant } from '../types/Plant';
 import './PlantList.css';
-import {IP_ADRESS} from "../../../config";
+import {IP_ADRESS} from "../config";
 
 
 interface PlantListProps {
