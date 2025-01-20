@@ -49,7 +49,7 @@ def sendData(hygro, temp, lum,hydro):
         # Send the angles to the server
 
         # URL du serveur Node.js
-        url = "http:// " + IP_SERVER + ":5500/add-data"
+        url = "http://" + IP_SERVER + ":5500/add-data"
         print(url)
 
         # Données à envoyer
