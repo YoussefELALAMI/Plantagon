@@ -83,8 +83,9 @@ UDPServerSocket = socket.socket(family=socket.AF_INET, type=socket.SOCK_DGRAM)
 
 # Bind to address and ip
 IP_SERVER = get_local_ip()
+print(IP_SERVER)
 UDPServerSocket.bind((IP_SERVER, PORT_SERVER))
-IP_SERVER = "ip"
+#IP_SERVER = "ip"
 print(f"UDP server up and listening on {IP_SERVER}")
 
 
